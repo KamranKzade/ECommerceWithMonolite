@@ -22,6 +22,7 @@ namespace ECommorce.WebUI.Controllers
 			var student = _httpContextAccessor.HttpContext.Session.GetObject<StudentTest>("student");
 			return Json(student);
 		}
+
 		public string Set()
 		{
 			_httpContextAccessor.HttpContext.Session.SetInt32("age", 24);
