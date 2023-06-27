@@ -10,4 +10,5 @@ public class ProductListViewModel
 	public int PageCount { get; internal set; }
 	public int PageSize { get; internal set; }
 	public int CurrentPage { get; internal set; }
+	public bool IsClicked { get; internal set; }
 }

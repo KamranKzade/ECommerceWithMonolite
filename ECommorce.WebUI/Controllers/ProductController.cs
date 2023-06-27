@@ -13,12 +13,19 @@ public class ProductController : Controller
 	{
 		_productService = productService;
 	}
-	private readonly static bool isClicked = false;
 
 	public IActionResult Index(int page = 1, int category = 0, bool isClicked = false)
 	{
 		int pageSize = 10;
 		var products = _productService.GetAllByCategoryId(category);
+		if (isClicked)
+		{
+			products= products.OrderByDescending(x => x.UnitPrice).ToList();
+		}
+		else
+		{
+			products= products.OrderBy(x => x.UnitPrice).ToList();
+		}
 		var model = new ProductListViewModel
 		{
 			Products = products.Skip((page - 1) * pageSize).Take(pageSize).ToList(),
@@ -26,6 +33,7 @@ public class ProductController : Controller
 			PageCount = (int)Math.Ceiling(products.Count / (double)pageSize),
 			PageSize = pageSize,
 			CurrentPage = page,
+			IsClicked = isClicked
 		};
 		return View(model);
 	}
