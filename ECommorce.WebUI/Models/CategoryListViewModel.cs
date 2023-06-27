@@ -1,10 +1,10 @@
 ﻿using ECommerce.Entities.Models;
 
-namespace ECommorce.WebUI
+
+namespace ECommorce.WebUI;
+
+public class CategoryListViewModel
 {
-	public class CategoryListViewModel
-	{
-		public List<Category> Categories { get; set; }
-		public int CurrentCategory { get; set; }
-	}
+	public List<Category> Categories { get; set; }
+	public int CurrentCategory { get; set; }
 }
