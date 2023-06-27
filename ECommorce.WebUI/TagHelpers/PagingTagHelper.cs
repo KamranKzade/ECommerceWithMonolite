@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Razor.TagHelpers;
-using System.Text;
+﻿using System.Text;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace ECommorce.WebUI.TagHelpers
 {
@@ -42,7 +42,6 @@ namespace ECommorce.WebUI.TagHelpers
 			}
 
 			sb.Append("</ul>");
-
 			output.Content.SetHtmlContent(sb.ToString());
 		}
 	}
