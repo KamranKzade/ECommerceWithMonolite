@@ -18,4 +18,9 @@ public class ProductService : IProductService
 	{
 		return _productDal.GetList();
 	}
+
+	public List<Product> GetAllByCategoryId(int id)
+	{
+		return _productDal.GetList(p => p.CategoryId == id || id == 0);
+	}
 }
