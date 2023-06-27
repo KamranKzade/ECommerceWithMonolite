@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace ECommerce.Entities.Models
-{
-    public partial class NorthwindContext : DbContext
+
+namespace ECommerce.Entities.Models;
+
+
+public partial class NorthwindContext : DbContext
     {
         public NorthwindContext()
         {
@@ -818,4 +817,3 @@ namespace ECommerce.Entities.Models
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
-}
