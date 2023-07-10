@@ -21,9 +21,27 @@ public class CartService : ICartService
 		}
 	}
 
+	public void DecreaseQuantity(Cart cart, int productId)
+	{
+		var cartline = cart.CartLines.FirstOrDefault(c => c.Product.ProductId == productId);
+		if (cartline.Quantity > 0)
+		{
+			cartline.Quantity--;
+		}
+	}
+
 	public List<CartLine> GetList(Cart cart)
 	{
 		return cart.CartLines;
+	}
+
+	public void IncreaseQuantity(Cart cart, int productId)
+	{
+		var cartline = cart.CartLines.FirstOrDefault(c => c.Product.ProductId == productId);
+		if (cartline.Quantity < cartline.Product.UnitsInStock)
+		{
+			cartline.Quantity++;
+		}
 	}
 
 	public void RemoveFromCart(Cart cart, int productId)

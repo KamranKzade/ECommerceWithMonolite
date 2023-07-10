@@ -79,7 +79,21 @@ public class CartController : Controller
 			return View();
 		}
 		TempData.Add("message", String.Format("Thank you {0}, your order is in progress", model.ShippingDetails.Firstname));
-
 		return RedirectToAction("Index", "Product");
+	}
+
+	public IActionResult Increase(int ProductId)
+	{
+		var cart = _cartSessionService.GetCart();
+		_cartService.IncreaseQuantity(cart, ProductId);
+		_cartSessionService.SetCart(cart);
+		return RedirectToAction("List");
+	}
+	public IActionResult Decrease(int ProductId)
+	{
+		var cart = _cartSessionService.GetCart();
+		_cartService.DecreaseQuantity(cart, ProductId);
+		_cartSessionService.SetCart(cart);
+		return RedirectToAction("List");
 	}
 }
