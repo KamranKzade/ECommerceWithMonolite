@@ -2,12 +2,25 @@ using ECommerce.Business.Abstract;
 using ECommerce.Business.Concrete;
 using ECommerce.DataAccess.Abstract;
 using ECommerce.DataAccess.Concrete.EntityFramework;
+using ECommorce.WebUI.Entities;
 using ECommorce.WebUI.Services;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+var conn = builder.Configuration.GetConnectionString("myConn");
+builder.Services.AddDbContext<CustomIdentityDbContext>(opt =>
+{
+	opt.UseSqlServer(conn);
+});
+
+builder.Services.AddIdentity<CustomIdentityUser, CustomIdentityRole>()
+	.AddEntityFrameworkStores<CustomIdentityDbContext>()
+	.AddDefaultTokenProviders();
 
 builder.Services.AddSession();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -33,7 +46,9 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
+
 app.UseSession();
 
 app.MapControllerRoute(
