@@ -21,6 +21,13 @@ public class CartService : ICartService
 		}
 	}
 
+	//public bool checkDegree(Cart cart)
+	//{
+	//	var cartline = cart.CartLines.FirstOrDefault(c => c.Product.ProductId == productId);
+
+	//	return cartline.Quantity > 0 ? true : false;
+	//}
+
 	public void DecreaseQuantity(Cart cart, int productId)
 	{
 		var cartline = cart.CartLines.FirstOrDefault(c => c.Product.ProductId == productId);

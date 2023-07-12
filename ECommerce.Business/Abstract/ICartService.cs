@@ -10,5 +10,6 @@ public interface ICartService
     void RemoveFromCart(Cart cart, int productId);
     void IncreaseQuantity(Cart cart, int productId);
     void DecreaseQuantity(Cart cart, int productId);
+
     List<CartLine> GetList(Cart cart);
 }

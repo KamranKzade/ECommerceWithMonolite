@@ -23,10 +23,18 @@ public class CartController : Controller
 		var productToAdded = _productService.GetById(productId);
 		var cart = _cartSessionService.GetCart();
 
-		_cartService.AddToCart(cart, productToAdded);
-		_cartSessionService.SetCart(cart);
-
-		TempData.Add("message", String.Format("Your product, {0} was added succesfully to cart!", productToAdded.ProductName));
+		var products = _productService.GetAll();
+		var selectedProduct = products.FirstOrDefault(x => x.ProductId == productId);
+		if (selectedProduct.UnitsInStock > 0)
+		{
+			_cartService.AddToCart(cart, productToAdded);
+			_cartSessionService.SetCart(cart);
+			TempData.Add("message", String.Format("Your product, {0} was added succesfully to cart!", productToAdded.ProductName));
+		}
+		else
+		{
+			TempData.Add("message", String.Format("This product, {0} is not available in the warehouse!", productToAdded.ProductName));
+		}
 		return RedirectToAction("Index", "Product");
 	}
 
@@ -85,6 +93,7 @@ public class CartController : Controller
 	public IActionResult Increase(int ProductId)
 	{
 		var cart = _cartSessionService.GetCart();
+
 		_cartService.IncreaseQuantity(cart, ProductId);
 		_cartSessionService.SetCart(cart);
 		return RedirectToAction("List");
