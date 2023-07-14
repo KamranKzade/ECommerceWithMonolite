@@ -88,7 +88,7 @@ public class AccountController : Controller
     public async Task<ActionResult> LogOut()
     {
         await _signInManager.SignOutAsync();
-        return RedirectToAction("LogIn","Account");
+        return RedirectToAction("Index","Product");
     }
 
 }

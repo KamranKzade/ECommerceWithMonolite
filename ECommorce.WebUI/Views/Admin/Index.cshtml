@@ -1,5 +1,9 @@
-﻿@model ProductListViewModel
+﻿﻿@{
+	Layout = "_AdminLayout";
+}
 
+@model ProductListViewModel
+<a asp-controller="Admin" asp-action="Add" class="btn btn-primary">Create New</a>
 <table class="table">
 	<thead>
 		<tr>
